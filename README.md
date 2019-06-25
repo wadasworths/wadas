@@ -13,8 +13,8 @@ tensorflow/serving 和 flask Restful提供服务。
 
 一文读懂Faster Rcnn：https://zhuanlan.zhihu.com/p/31426458
 
-
 tf-faster-rcnn打包saved_model文件：
+
 ```python
 from tensorflow import saved_model as sm
 #graph_def = sess.graph.as_graph_def()
@@ -43,6 +43,20 @@ builder.add_meta_graph_and_variables(sess, [tf.saved_model.tag_constants.SERVING
 builder.save()
 print("Saved Model succeed!")
 ```
+
+#### 使用Docker tensorflow/serving 挂载模型
+
+```
+docker run -t --rm -p 8501:8501 \
+    --name Faster-Rcnn_Restfulapi \
+	-v "/data/wxh/tf-faster-rcnn/saved_model/:/models/saved_model" \
+    -e MODEL_NAME=saved_model \
+    tensorflow/serving > /data/wxh/www/log/tfserving_docker.log & 2>&1
+```
+
+放到后台，并且打印输出日志，方便排查错误。查看 http://localhost:8501/v1/models/saved_model:predict
+
+使用web来预处理数据传参：https://github.com/wadasworths/faster_rcnn_flask_restful
 
 #### CNN学习 
 
