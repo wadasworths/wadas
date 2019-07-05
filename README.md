@@ -62,6 +62,8 @@ docker run -t --rm -p 8501:8501 \
 
 https://www.jianshu.com/p/da0c4cc76a06
 
+https://www.cnblogs.com/zf-blog/p/6075286.html
+
 CNN卷积神经网络，CNN一共有卷积层（CONV）、ReLU层（ReLU）、池化层（Pooling）、全连接层（FC（Full Connection））
 
 ##### CONV层：
@@ -75,7 +77,8 @@ CNN卷积神经网络，CNN一共有卷积层（CONV）、ReLU层（ReLU）、�
 ![](images/cnn_process.png)
 
 特别要注意的是滤波器的深度一定要与上一层传来的数据的深度相同，就像上图的第二个卷积层在处理传来的28*28*6的数据时要使用5*5*6的滤波器.
-当图像大小是N，滤波器尺寸为F时，步长S，那么卷积后大小为（N-F）/S+1
+P padding=SAME=0
+当图像大小是N，滤波器尺寸为F时，步长S，那么卷积后大小为（N-F+2*P）/S+1
 卷积层输入W1*H1*D1大小的数据，输出W2*H2*D2的数据，此时的卷积层共有4个超参数：
 K：滤波器个数
 P：pad属性值
@@ -96,6 +99,9 @@ D2=D1
 
 通过pad操作，输出图像在控件上并没有变化，但是深度发生了变化，越来越庞大的数据给计算带来了困难，也出现了冗余的特征，所以需要进行池化操作，池化不改变深度，只改变长宽，主要有最大值和均值两种方法，一般的池化滤波器大小F为2步长为2，对于最大值池化可以用下面的图像清晰的表示
 ![](images/max_pooling.png)
+
+##### 全连接层 full connection layer
+
 
 
 #### Tensorflow slim库
